@@ -28,29 +28,33 @@ public class JWTFilter implements ContainerRequestFilter {
         if ("OPTIONS".equalsIgnoreCase(requestContext.getMethod())) {
             return;
         }
-
+        // Buscamos si hay un token y retornamos si no existe
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             abort(requestContext, "Token no proporcionado");
             return;
         }
-
+        // Si existe el token
         String token = authHeader.substring("Bearer ".length());
 
         try {
+            // Intentamos decodificar el token para comprobar que es correcto y no ha expirado
             DecodedJWT jwt = JWT.require(
                     Algorithm.HMAC256("tu_clave_secreta_super_segura")
             ).build().verify(token);
 
-            String correo = jwt.getSubject();
+            // Sacamos el alias del token
+            String alias = jwt.getSubject();
 
+            // Creamos un security context con los datos extraidos del token
             SecurityContext originalContext = requestContext.getSecurityContext();
 
             SecurityContext newContext = new SecurityContext() {
+                // Aquí sobreescribimos la función para que devuelva el alias al invocarla
                 @Override
                 public Principal getUserPrincipal() {
-                    return () -> correo;
+                    return () -> alias;
                 }
 
                 @Override
@@ -75,7 +79,7 @@ public class JWTFilter implements ContainerRequestFilter {
             abort(requestContext, "Token expirado o inválido");
         }
     }
-
+// Función que aborta la carga del token y envía un mensaje en función del error
     private void abort(ContainerRequestContext ctx, String message) {
         ctx.abortWith(
                 Response.status(Response.Status.UNAUTHORIZED)

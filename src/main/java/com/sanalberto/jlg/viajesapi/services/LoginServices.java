@@ -1,17 +1,19 @@
 package com.sanalberto.jlg.viajesapi.services;
 
+import com.sanalberto.jlg.viajesapi.Entities.Usuario;
+import com.sanalberto.jlg.viajesapi.dtos.LoginDTO;
 import com.sanalberto.jlg.viajesapi.repositories.LoginRepo;
 
 public class LoginServices {
     private LoginRepo loginRepo = new LoginRepo();
 
-    public String login(String correo, String password) {
-        String respuesta = null;
-        // Si hay un usuario con los datos devolvemos una respuesta
-        if (loginRepo.findAdmin(correo, password)) {
-            respuesta = "TOKEN-JWT-";
-        }
+    public Usuario login(LoginDTO loginDTO) {
+        // Devolvemos el usuario si existe
+        Usuario usuario = loginRepo.findAdmin(loginDTO);
 
-        return respuesta; // Fallo de autenticación
+
+
+        return usuario; // Fallo de autenticación
     }
 }
+
