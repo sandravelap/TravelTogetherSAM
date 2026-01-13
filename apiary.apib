@@ -5,78 +5,68 @@ HOST: http://localhost:8088/travelTogether/api/
 
 TravelTogetherSAM es una aplicación multiplataforma para gestionar viajes
 
-## Questions Collection [/questions]
+# API de Registro
 
-### List All Questions [GET]
+Se va a crear un nuevo usuario para poder utilizar la aplicación posteriormente.
 
-// hola
+## Usuarios [/usuarios]
 
-+ Response 200 (application/json)
+### Crear usuario [POST]
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+Crea un nuevo usuario en la base de datos.
 
 + Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+              "nombre": "Juan Pérez",
+              "alias": "juanp",
+              "correo": "juan@email.com",
+              "password": "Password123",
+              "fumador": "tolerante",
+              "animales": "alergico"
             }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+              "id": 1,
+              "nombre": "Juan Pérez",
+              "alias": "juanp",
+              "correo": "juan@email.com",
+              "fumador": "tolerante",
+              "animales": "alergico",
+              "mensaje": "Usuario creado correctamente"
+            }
+
++ Response 400 (application/json)
+    + Body
+
+            {
+              "error": "Datos inválidos"
+            }
+
++ Response 409 (application/json)
+    + Body
+
+            {
+              "error": "El correo ya está registrado"
+            }
+
+
+
+## Valores permitidos
+
+### Fumador
++ `fumador` puede ser:
+    + `fumador`
+    + `tolerante`
+    + `no_fumador`
+
+### Animales
++ `animales` puede ser:
+    + `si`
+    + `tolerante`
+    + `alergico`
+    + `no`
