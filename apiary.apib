@@ -3,7 +3,29 @@ HOST: http://localhost:8088/travelTogether/api/
 
 # TravelTogetherSAM
 
-TravelTogetherSAM es una aplicación multiplataforma para gestionar viajes
+TravelTogetherSAM es una aplicación multiplataforma para gestionar viajes grupales
+
+## Sesión [/login]
+El usuario se loguea en la página con un correo y un password, si es correcto se le devuelve un token y si no un error 401.
+
+### Iniciar Sesión [POST]
+
+Permite a un usuario enviar sus credenciales para obtener un token de acceso.
+
++ Request (application/json)
+
+        {
+            "email": "usuario@ejemplo.com",
+            "password": "tu_password_seguro"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        }
+
++ Response 401
 
 ## Questions Collection [/questions]
 
