@@ -4,6 +4,8 @@ services:
     image: tomee:jre25-Semeru-ubuntu-plus
     ports:
       - "8088:8080"
+  # Abrimos el puerto 5005 para debuggear
+      - "5005:5005"
     networks:
       - app-network
     volumes:
@@ -14,6 +16,8 @@ services:
       - MYSQL_DATABASE=traveltogether
       - MYSQL_USER=root
       - MYSQL_PASSWORD=admin
+  # Esta línea indica que abrimos un escuchador en el puerto 5005 para debug
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     depends_on:
       - dbWeb
 
