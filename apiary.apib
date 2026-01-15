@@ -5,6 +5,49 @@ HOST: http://localhost:8088/travelTogether/api/
 
 TravelTogetherSAM es una aplicación multiplataforma para gestionar viajes grupales
 
+# API de Registro
+
+Se va a crear un nuevo usuario para poder utilizar la aplicación posteriormente.
+
+## Usuarios [/register]
+
+### Crear usuario [POST]
+
+Crea un nuevo usuario en la base de datos.
+
++ Request (application/json)
+    + Body
+
+            {
+              "nombre": "Juan Pérez",
+              "alias": "juanp",
+              "correo": "juan@email.com",
+              "password": "Password123",
+              "tabaco": "tolerante",
+              "mascota": "intolerante"
+            }
+
++ Response 201
+
++ Response 400
+
+## Valores permitidos
+
+### Tabaco
++ `tabaco` puede ser:
+    + `fumador`
+    + `tolerante`
+    + `intolerante`
+    + `null`
+
+### Mascota
++ `mascota` puede ser:
+    + `compañia`
+    + `asistencia`
+    + `tolerante`
+    + `intolerante`
+    + `null`
+
 ## Sesión [/login]
 El usuario se loguea en la página con un correo y un password, si es correcto se le devuelve un token y si no un error 401.
 
