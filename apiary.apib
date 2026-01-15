@@ -3,13 +3,53 @@ HOST: http://localhost:8088/travelTogether/api/
 
 # TravelTogetherSAM
 
-TravelTogetherSAM es una aplicación multiplataforma para gestionar viajes
+TravelTogetherSAM es una aplicación multiplataforma para gestionar viajes grupales
 
-# API de Autenticación
+# API de Registro
 
-El usuario se loguea en la página con un correo y un password, si es correcto se le devuelve un token y si no un error 401.
+Se va a crear un nuevo usuario para poder utilizar la aplicación posteriormente.
+
+## Usuarios [/register]
+
+### Crear usuario [POST]
+
+Crea un nuevo usuario en la base de datos.
+
++ Request (application/json)
+    + Body
+
+            {
+              "nombre": "Juan Pérez",
+              "alias": "juanp",
+              "correo": "juan@email.com",
+              "password": "Password123",
+              "tabaco": "tolerante",
+              "mascota": "intolerante"
+            }
+
++ Response 201
+
++ Response 400
+
+## Valores permitidos
+
+### Tabaco
++ `tabaco` puede ser:
+    + `fumador`
+    + `tolerante`
+    + `intolerante`
+    + `null`
+
+### Mascota
++ `mascota` puede ser:
+    + `compañia`
+    + `asistencia`
+    + `tolerante`
+    + `intolerante`
+    + `null`
 
 ## Sesión [/login]
+El usuario se loguea en la página con un correo y un password, si es correcto se le devuelve un token y si no un error 401.
 
 ### Iniciar Sesión [POST]
 
@@ -23,6 +63,80 @@ Permite a un usuario enviar sus credenciales para obtener un token de acceso.
         }
 
 + Response 200 (application/json)
+
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        }
+
++ Response 401
+
+## Recurso NuevoViaje [/NuevoViaje]
+
+Recurso encargado de la creación de nuevos viajes dentro del sistema.
+
+### Crear un viaje nuevo [POST]
+
+Este endpoint permite registrar un nuevo viaje proporcionando la información básica del mismo.
+
++ Request (application/json)
+
+    + Headers
+
+            usuario: usuario1@usuarios.com
+            token: abcdef123456
+
+    + Body
+
+            {
+                "diaInicio": "2026-01-20",
+                "diaFin": "2026-01-30",
+                "numero_participantes": 5,
+                "nombre": "Viaje a París",
+                "descripcion": "Viaje turístico a París con amigos",
+                "tabaco": false,
+                "mascota": "todas"
+            }
+
++ Parameters
+    + diaInicio: `2026-01-20` (string, required)
+        Fecha de inicio del viaje.
+        Se recibe como `String` en formato JSON y se convierte a `java.sql.Date`.
+
+    + diaFin: `2026-01-30` (string, required)
+        Fecha de finalización del viaje.
+        Se recibe como `String` en formato JSON y se convierte a `java.sql.Date`.
+
+    + numero_participantes: `5` (number, required)
+        Número máximo de participantes del viaje.
+        Se recibe como `Number` en JSON y se convierte a `java.lang.Integer`.
+
+    + nombre: `Viaje a París` (string, required)
+        Nombre del viaje.
+        Se recibe como `String` y se mapea a `java.lang.String`.
+
+    + descripcion: `Viaje turístico a París con amigos` (string, optional)
+        Descripción detallada del viaje.
+        Se recibe como `String` y se mapea a `java.lang.String`.
+
+    + tabaco: `false` (boolean, required)
+        Indica si se permite fumar durante el viaje.
+        `true` permite tabaco, `false` no lo permite.
+
+    + mascota: `todas` (string, required)
+        Indica el tipo de mascotas permitidas.
+        Valores posibles: `todas`, `asistencia`, `no`.
+
++ Response 201 (text/plain)
+
+        Viaje creado exitosamente (Trip created successfully).
+
++ Response 400 (text/plain)
+
+        Error: ha habido un problema en la creación del viaje.
+
+# API de Autenticación
+
+El usuario se loguea en la página con un correo y un password, si es correcto se le devuelve un token y si no un error 401.
 
         {
             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
