@@ -1,8 +1,6 @@
 -- 1. Creación de la base de datos
 DROP DATABASE IF EXISTS traveltogether;
-CREATE DATABASE traveltogether
-    CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_unicode_ci;
+CREATE DATABASE traveltogether CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 USE traveltogether;
 
 -- 2. Creación de la tabla Usuario

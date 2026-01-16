@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/init.sql" value="9b769a47-06c7-45b0-b7c5-b576316c8c39" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/sanalberto/jlg/viajesapi/services/InsertViajesServicios.java" value="9b769a47-06c7-45b0-b7c5-b576316c8c39" />
+  </component>
+</project>
