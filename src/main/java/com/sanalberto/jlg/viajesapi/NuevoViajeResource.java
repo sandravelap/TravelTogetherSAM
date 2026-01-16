@@ -7,7 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 // Nota personal: Para acceder al recurso, primero se debe acceder a la ruta de la clase "ApiApplication" y luego a la ruta del recurso.
-// http://localhost:8088/travelTogether/api/hello-api/
+// http://localhost:8088/travelTogether/ViajesAPI/NuevoViaje/
 
 @Path("/NuevoViaje")
 public class NuevoViajeResource {

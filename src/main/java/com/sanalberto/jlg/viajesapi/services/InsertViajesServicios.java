@@ -13,7 +13,6 @@ public class InsertViajesServicios {
     public InsertViajesServicios(){}
 
     NuevoViajeResource nuevoViajeResource = new NuevoViajeResource();
-
     ViajeModel viajeModelTransferido = nuevoViajeResource.transferirNuevoViaje();
 
     public boolean saveNuevoViaje(){
@@ -24,7 +23,7 @@ public class InsertViajesServicios {
             try(Connection conexion = ConexionSingleton.conectar()){
                 PreparedStatement sentencia = conexion.prepareStatement("insert into viaje values (?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
-                // todo: El id?
+                // todo: ¿id?
                 sentencia.setInt(2, viajeModelTransferido.getUser_id());
                 sentencia.setString(3, viajeModelTransferido.getTrip_name());
                 sentencia.setString(4, viajeModelTransferido.getTrip_description());
