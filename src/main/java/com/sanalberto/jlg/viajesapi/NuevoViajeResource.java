@@ -19,7 +19,7 @@ public class NuevoViajeResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
 
-    // todo: comprobar que el usuario está auntenticado recupernado el token (usar repositorio de Jose Luis)
+    // todo: comprobar que el usuario está auntenticado recuperando el token (usar repositorio de Jose Luis)
     public String guardarNuevoViaje(Object entradaJson){
         String estado = "";
         Gson gson = new Gson();
