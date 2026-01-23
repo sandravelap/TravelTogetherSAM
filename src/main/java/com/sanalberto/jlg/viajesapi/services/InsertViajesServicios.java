@@ -21,6 +21,7 @@ public class InsertViajesServicios {
 
         if(viajeModelTransferido.checkPetConfiguration(viajeModelTransferido.getPet_configuration())){
             try(Connection conexion = ConexionSingleton.conectar()){
+                // fixme: cambiar a hibernate.
                 PreparedStatement sentencia = conexion.prepareStatement("insert into viaje values (?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
                 // todo: ¿id?
