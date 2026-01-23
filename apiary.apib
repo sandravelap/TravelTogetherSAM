@@ -143,3 +143,33 @@ El usuario se loguea en la página con un correo y un password, si es correcto s
         }
 
 + Response 401
+
+# Recurso Mis Viajes (/misViajes)
+
+Recurso que recupera los datos de los viajes organizados por el usuario
+
+# Ver mis viajes [GET]
+
++ Request
+
+    +Headers:
+
+        Authorization: Bearer {token}
+
++ Response 200 (application/json)
+
+    [
+      {
+        "nombre": "Viaje a Huesca",
+        "descripción": "Ruta por los principales pueblos de Pirineos",
+        "participantes": 6,
+        "fechaInicio": "2026-01-15",
+        "fechaFin": "2026-01-20",
+        "tabaco": false,
+        "mascota": "todas" (valores posibles: "todas", "asistencia", "no")
+      }
+    ]
+
++ Response 503 (text/plain)
+
+        "Error al conectar a la base de datos"
