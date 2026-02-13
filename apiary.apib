@@ -78,12 +78,28 @@ Recurso encargado de la creación de nuevos viajes dentro del sistema.
 
 Este endpoint permite registrar un nuevo viaje proporcionando la información básica del mismo.
 
+E. g.
+
+POST http://localhost:8088/travelTogether/api/NuevoViaje
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ0dV9hcHAiLCJzdWIiOiJhbmFfcmlvamEiLCJpYXQiOjE3NzA5ODE0ODAsImV4cCI6MTc3MDk4NTA4MH0.fVjY0Yv8V07kX9J3pS7uX0-N1A8-D0V1p8_S3f_Vj_8
+
+{
+  "diaInicio": "2026-06-20",
+  "diaFin": "2026-06-25",
+  "numero_participantes": 3,
+  "nombre": "Escapada a La Rioja",
+  "descripcion": "Ruta de viñedos y cata de vinos.",
+  "tabaco": true,
+  "mascota": "todas"
+}
+
 + Request (application/json)
 
     + Headers
 
             usuario: usuario1@usuarios.com
-            token: abcdef123456
+            token: dev-mode (para pruebas de desarrollo usar este token para evitar validaciones)
 
     + Body
 
